@@ -1,6 +1,6 @@
 {
   "name": "@barbieswimcrew/stimulus-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a package of useful stimulus components",
   "main": "index.js",
   "repository": "https://barbieswimcrew@github.com/barbieswimcrew/stimulus-components.git",
