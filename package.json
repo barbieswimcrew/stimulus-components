@@ -1,0 +1,15 @@
+{
+  "name": "stimulus-components",
+  "version": "1.0.0",
+  "description": "a package of useful stimulus components",
+  "main": "index.js",
+  "repository": "https://barbieswimcrew@github.com/barbieswimcrew/stimulus-components.git",
+  "author": "barbieswimcrew <ms@dasistweb.de>",
+  "license": "MIT",
+  "devDependencies": {
+    "stimulus": "^3.2.1"
+  },
+  "dependencies": {
+    "dirty-form": "^0.4.0"
+  }
+}
