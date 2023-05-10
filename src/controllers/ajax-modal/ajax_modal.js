@@ -32,6 +32,10 @@ import { Controller } from "@hotwired/stimulus";
  * To close the modal, create a button in the html response and register the closing action as follows:
  *
  * <button {{ stimulus_action('ajax-modal', 'close') }}>Close modal</button>
+ * 
+ * To submit a <form> inside the modal to retrieve new HTML content just add the submit action to the form as follows:
+ * 
+ * <form action="/some/url" method="POST" {{ stimulus_action('ajax-modal', 'submit', 'submit') }}>
  */
 
 /* stimulusFetch: 'lazy' */
@@ -77,16 +81,7 @@ export default class AjaxModalController extends Controller {
             this.dialogTarget.showModal();
         }
 
-        fetch(e.params.url, {
-            headers: {
-                "Content-Type": "application/json",
-                "X-Requested-With": "XMLHttpRequest",
-            },
-        })
-            .then((response) => response.text())
-            .then((data) => {
-                this.dialogTarget.innerHTML = data;
-            });
+        this._fetchAndReplaceHTML(e.params.url, 'GET');
     }
 
     close() {
@@ -95,5 +90,33 @@ export default class AjaxModalController extends Controller {
         // reset the dialogs default content
         this.dialogTarget.innerHTML =
             this.templateTarget.content.querySelector("dialog").innerHTML;
+    }
+
+    submit(e) {
+        e.preventDefault();
+
+        const element = e.currentTarget;
+
+        if (element.nodeName !== "FORM") {
+            throw new Error(
+                "This action needs to be connected to a <form> element!"
+            );
+        }
+
+        this._fetchAndReplaceHTML(element.action, element.method);
+    }
+
+    _fetchAndReplaceHTML(url, method) {
+        fetch(url, {
+            headers: {
+                "Content-Type": "application/json",
+                "X-Requested-With": "XMLHttpRequest",
+            },
+            method: method,
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                this.dialogTarget.innerHTML = data;
+            });
     }
 }
