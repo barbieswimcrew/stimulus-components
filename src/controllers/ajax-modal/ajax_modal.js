@@ -103,17 +103,23 @@ export default class AjaxModalController extends Controller {
             );
         }
 
-        this._fetchAndReplaceHTML(element.action, element.method);
+        this._fetchAndReplaceHTML(element.action, element.method, new FormData(element));
     }
 
-    _fetchAndReplaceHTML(url, method) {
-        fetch(url, {
+    _fetchAndReplaceHTML(url, method, formData = null) {
+
+        const options = {
             headers: {
-                "Content-Type": "application/json",
                 "X-Requested-With": "XMLHttpRequest",
             },
-            method: method,
-        })
+            method: method
+        };
+
+        if (formData instanceof FormData){
+            options.body = formData;
+        }
+
+        fetch(new Request(url, options))
             .then((response) => response.text())
             .then((data) => {
                 this.dialogTarget.innerHTML = data;
