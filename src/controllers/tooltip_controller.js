@@ -17,6 +17,10 @@ export default class extends Controller {
         content: {
             type: String,
             default: 'Marker'
+        },
+        placement: {
+            type: String,
+            default: 'top'
         }
     };
 
@@ -25,6 +29,7 @@ export default class extends Controller {
             animation: this.animationValue,
             content: this.contentValue,
             hideOnClick: false,
+            placement: this.placementValue,
         });
     }
 }
