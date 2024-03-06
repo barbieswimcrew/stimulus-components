@@ -1,4 +1,17 @@
-{% props tracks = [] %}
+{% set tracks = [
+    {
+        artist: 'Da Schiarhacklbene',
+        imgSrc: 'https://rm-vanillamusic-player.netlify.app/img/faded.png',
+        title: 'Mim Hansä auf der Oim',
+        src: 'https://rm-vanillamusic-player.netlify.app/music/stay.mp3'
+    },
+    {
+        artist: 'Niarnstoana Saudeifen',
+        imgSrc: 'https://rm-vanillamusic-player.netlify.app/img/withoutMe.png',
+        title: 'Dick homs mi',
+        src: 'https://rm-vanillamusic-player.netlify.app/music/WithoutMe.mp3'
+    }
+] %}
 
 <div {{ attributes.defaults({
     'data-controller': 'music-player',
